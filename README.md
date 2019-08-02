@@ -7,7 +7,7 @@ Source code and additional documentation for *SecuCode: Intrinsic PUF Entangled 
 - `/wisp5-base`: The base WISP5 firmware forked from: https://github.com/wisp/wisp5/tree/e053c297d89913d8c78a08b69bc18cbbd22ad7af with modifications to support SecuCode (compiled as library)
     - Changes are primarily restricted to the `internals` folder, (`authenticate.c` is a good starting point), and `RFID/rfid_BlockWriteHandle.asm`
 - `/wisp5-bootloader`: The main bootloader project forked from [MSP430FRBoot](http://www.ti.com/tool/mspbsl) with the SecuCode comm interface.
-- `/symbol_gen`: Parses the linker info from the bootloader and builds a linker command file that allows an firmware image to reference symbols in the bootloader.
+- `/symbol_gen`: Parses the linker info from the bootloader and builds a linker command file that allows a firmware image to reference symbols in the bootloader.
 - `/secucode-demo`: Several sample firmwares compatible with SecuCode.
 - `/SecuCodeApp`: GUI Application for loading ELF files and sending them to a target tag. Overview of important files:
     - `MspFirmware.cs` - Contains firmware parsing code.
@@ -40,7 +40,7 @@ The SecuCode App requires that an Impinj R420 reader is available to the host ma
 3. Send the firmware to the tag by clicking the 'Send Data' button.
 4. Validate that firmware was successfully loaded by clicking the 'Inventory' button.
 
-When debugging, it is recommended that you use the fixed key mode as a physical debugger connection can prevent the tag's SRAM from being reset on start up causing continuous key decoding failures.
+When debugging, it is recommended that you use the fixed key mode as a physical debugger connection can prevent the tag's SRAM from being reset on start-up causing continuous key decoding failures.
 
 ## Building a new firmware image
 
@@ -56,7 +56,7 @@ Firmware images must also satisfy the restrictions outlined in the firmware load
 
 ### Overview of firmware loading process
 
-New firmware is written to the the bootloader in a multi-stage process:
+New firmware is written to the bootloader in a multi-stage process:
 
 1. The firmware is parsed directly from the ELF file, the `PT_LOAD` segments are encoded are encoded as a sequence of bootloader `LOAD` commands (the bootloader currently doesn't support any other segment types).
     * Each command contains the length of the segment (`p_memsz`), physical address of the (`p_paddr`) and the segment data.
@@ -68,7 +68,7 @@ New firmware is written to the the bootloader in a multi-stage process:
 
 3. An additional `JUMP_TO_APP` command is written after all `LOAD` commands.
 
-4. After writing all of the commands, a "Done" message is sent containing an MAC for the data in the download zone -- if the MAC is valid, the bootloader then starts interpreting the messages. If a brownout occurs at any stage before this message all commands will be lost without being interpreted (since the tag will lose it's copy of the key, and never be able to validate the MAC).
+4. After writing all of the commands, a "Done" message is sent containing a MAC for the data in the download zone. If the MAC is valid, the bootloader then starts interpreting the messages. If a brownout occurs at any stage before this message all commands will be lost without being interpreted (since the tag will lose its copy of the key, and never be able to validate the MAC).
 
 5. After validation the bootloader starts executing the `LOAD` commands and writing to executable memory, the LOAD command should not write to memory segments reserved by the bootloader (see discussion MPU configuration below). If a brownout occurs any time during this process, the new firmware will be partially written to tag, but will be dead code (i.e. will not be ever executed by the bootloader) since the `app_valid` flag is not set.
 
@@ -90,14 +90,14 @@ New firmware is written to the the bootloader in a multi-stage process:
 
     - The bootloader then enables MPU protection, locking the MPU configuration until reset.
 
-    - The watchdog is then re-enabled and the bootloader jumps to the application code via its RESET ISR.
+    - The watchdog is then re-enabled, and the bootloader jumps to the application code via its RESET ISR.
 
 8. After starting, the application firmware must clear the watchdog, and then can execute
     - The application firmware can perform it's own validation if required, handling corruption to the validation mechanism through judicious use of the watchdog mechanism (since a watchdog timeout will reset the bootloader into new firmware receive mode).
 
 ### Examples
 
-There are three example firmwares included that show off various bootloader features:
+The source code for 3 example firmware files are included, which show off various bootloader features:
 
 * `debug_firware.c`: uses a custom interrupt vector to blink an LED using a timer.
 * `run_accel.c`: samples the accelerometer.
