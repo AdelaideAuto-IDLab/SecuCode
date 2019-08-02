@@ -1,0 +1,27 @@
+﻿<Window x:Class="SecuCodeApp.DebugWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="DebugWindow" Height="450" Width="800">
+    <Grid>
+        <TextBox x:Name="keyTextBox" HorizontalAlignment="Left" Height="23" Margin="128,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="522"/>
+        <TextBox x:Name="nonceTextBox" HorizontalAlignment="Left" Height="23" Margin="128,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="522"/>
+
+        <TextBox x:Name="dataTextBox" Text="" Margin="128,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Height="180"  Width="522"/>
+
+
+        <TextBox x:Name="hashTextBox" HorizontalAlignment="Left" Height="23" Margin="128,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="522"/>
+        <Button x:Name="button" Content="Run" HorizontalAlignment="Left" Margin="53,287,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+
+        <Label Content="key" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,10,0,0"/>
+        <Label Content="nonce" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="86,40,0,0"/>
+        <Label Content="data" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="93,68,0,0"/>
+        <Label Content="mac" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="88,313,0,0"/>
+        <Button x:Name="loadButton" Content="Load bytes" HorizontalAlignment="Left" Margin="133,287,0,0" VerticalAlignment="Top" Width="75" Click="LoadButton_Click" />
+        <TextBox x:Name="crcTextBox" HorizontalAlignment="Left" Height="23" Margin="128,347,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="522"/>
+        <Label Content="crc" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="93,344,0,0"/>
+
+    </Grid>
+</Window>
