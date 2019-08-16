@@ -107,10 +107,17 @@ The source code for 3 example firmware files are included, which show off variou
 
 This repository is provided as part of the following paper:
 
+Y. Su, Y. Gao, M. Chesser, O. Kavehei, A. Sample and D. Ranasinghe, "SecuCode: Intrinsic PUF Entangled Secure Wireless Code Dissemination for Computational RFID Devices," in _IEEE Transactions on Dependable and Secure Computing_.
+
 Cite using:
 
 ```
-
+@ARTICLE{secucode2018,
+    author={Y. {Su} and Y. {Gao} and M. {Chesser} and O. {Kavehei} and A. {Sample} and D. {Ranasinghe}},
+    journal={IEEE Transactions on Dependable and Secure Computing},
+    title={SecuCode: Intrinsic PUF Entangled Secure Wireless Code Dissemination for Computational RFID Devices},
+    year={2019},
+}
 ```
 
 ## License
