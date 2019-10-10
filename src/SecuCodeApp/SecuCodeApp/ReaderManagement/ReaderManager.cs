@@ -244,7 +244,7 @@ namespace SecuCodeApp
                 */
 
                 var bytes = chunk.ToArray();
-                var sendResponse = await this.SendDataBlock(targetTag, offset, , timeout);
+                var sendResponse = await this.SendDataBlock(targetTag, offset, bytes, timeout);
                 if (sendResponse.status != SecuCode.StatusCode.Success)
                 {
                     return sendResponse;
